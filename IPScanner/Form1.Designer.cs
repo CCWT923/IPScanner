@@ -28,12 +28,57 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.Panel_Title = new System.Windows.Forms.Panel();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.SuspendLayout();
+            // 
+            // Panel_Title
+            // 
+            this.Panel_Title.BackColor = System.Drawing.Color.DodgerBlue;
+            this.Panel_Title.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Panel_Title.Location = new System.Drawing.Point(0, 0);
+            this.Panel_Title.Name = "Panel_Title";
+            this.Panel_Title.Size = new System.Drawing.Size(812, 41);
+            this.Panel_Title.TabIndex = 0;
+            // 
+            // listView1
+            // 
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.listView1.Location = new System.Drawing.Point(0, 127);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(812, 363);
+            this.listView1.TabIndex = 1;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 41);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(812, 86);
+            this.panel2.TabIndex = 2;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(812, 490);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.Panel_Title);
+            this.Controls.Add(this.listView1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Panel Panel_Title;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 
