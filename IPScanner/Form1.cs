@@ -23,25 +23,29 @@ namespace IPScanner
             iP_End = new IPAddress(IPBox_EndAddress.GetAddressBytes());
             AddressesList = GetAddresses(iP_Start.ToString(), iP_End.ToString());
 
-            if(AddressesList == null)
+            if (AddressesList == null)
             {
                 //输入不正确
             }
-
+            Random random = new Random(DateTime.Now.Millisecond);
             listView1.BeginUpdate();//防止闪烁
             ListViewItem mainItem;
-            for(int i = 0; i < AddressesList.Count; i++)
+            
+            for (int i = 0; i < AddressesList.Count; i++)
             {
-                mainItem = listView1.Items.Add((i + 1).ToString());
+                mainItem = listView1.Items.Add("");
+                mainItem.SubItems.Add((i + 1).ToString());
                 mainItem.SubItems.Add(AddressesList[i]);
+                listView1.Items[i].ImageIndex = i % 2;
             }
+
             listView1.EndUpdate();
 
         }
 
         private bool CheckIPAddress()
         {
-            //TODO检查输入IP的有效性
+            //TODO 检查输入IP的有效性
             return true;
         }
         /// <summary>
@@ -55,39 +59,49 @@ namespace IPScanner
             List<String> addressesList = new List<string>();
             IPSection section_Start = GetIPSection(startAdd);
             IPSection section_End = GetIPSection(endAdd);
-            if(!section_Start.success || !section_End.success)
+            if (!section_Start.success || !section_End.success)
             {
                 return null;
             }
 
-            if(section_Start.Section1 == section_End.Section1 && section_Start.Section2 == section_End.Section2)
+            if (section_Start.Section1 == section_End.Section1 && section_Start.Section2 == section_End.Section2)
             {
                 int start = section_Start.Section3 < section_End.Section3 ? section_Start.Section3 : section_End.Section3;
                 int end = section_Start.Section3 > section_End.Section3 ? section_Start.Section3 : section_End.Section3;
-                for(int i = start; i <= end; i++)
+                if (section_Start.Section3 <= section_End.Section3)
                 {
-                    //第一次
-                    if (end > i && i == start)
+                    for (int i = start; i <= end; i++)
                     {
-                        for (int j = section_Start.Section4; j <= 255; j++)
+                        //第一次
+                        if (i <= end && i == start && section_End.Section3 == section_Start.Section3)
                         {
-                            addressesList.Add(section_Start.Section1 + "." + section_Start.Section2 + "." + i.ToString() + "." + j.ToString());
+                            for (int j = section_Start.Section4; j <= section_End.Section4; j++)
+                            {
+                                addressesList.Add(section_Start.Section1 + "." + section_Start.Section2 + "." + i.ToString() + "." + j.ToString());
+                            }
                         }
-                    }
-                    //中间的
-                    else if (end > i && i != start)
-                    {
-                        for (int j = 1; j <= 255; j++)
+                        else if(i <= end && i == start && section_End.Section3 > section_Start.Section3)
                         {
-                            addressesList.Add(section_Start.Section1 + "." + section_Start.Section2 + "." + i.ToString() + "." + j.ToString());
+                            for (int j = section_Start.Section4; j <= 255; j++)
+                            {
+                                addressesList.Add(section_Start.Section1 + "." + section_Start.Section2 + "." + i.ToString() + "." + j.ToString());
+                            }
                         }
-                    }
-                    //最后
-                    else
-                    {
-                        for (int j = section_Start.Section4; j <= section_Start.Section4; j++)
+                        //中间的
+                        else if (end > i && i != start)
                         {
-                            addressesList.Add(section_Start.Section1 + "." + section_Start.Section2 + "." + i.ToString() + "." + j.ToString());
+                            for (int j = 1; j <= 255; j++)
+                            {
+                                addressesList.Add(section_Start.Section1 + "." + section_Start.Section2 + "." + i.ToString() + "." + j.ToString());
+                            }
+                        }
+                        //最后
+                        else
+                        {
+                            for (int j = section_Start.Section4; j <= section_End.Section4; j++)
+                            {
+                                addressesList.Add(section_Start.Section1 + "." + section_Start.Section2 + "." + i.ToString() + "." + j.ToString());
+                            }
                         }
                     }
                 }
@@ -118,7 +132,7 @@ namespace IPScanner
             try
             {
                 var s = ipAddress.Split('.');
-                if(s.Length != 4)
+                if (s.Length != 4)
                 {
                     iPSection.success = false;
                     return iPSection;
@@ -128,7 +142,7 @@ namespace IPScanner
                 iPSection.Section3 = byte.Parse(s[2]);
                 iPSection.Section4 = byte.Parse(s[3]);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 iPSection.success = false;
                 return iPSection;
@@ -143,14 +157,24 @@ namespace IPScanner
             //获取本机IP
             string hostName = Dns.GetHostName();
             IPAddress[] addressLists = Dns.GetHostAddresses(hostName);
-            for(int i = 0; i < addressLists.Length; i++)
+            for (int i = 0; i < addressLists.Length; i++)
             {
                 //判断是否属于IPV4地址
-                if(addressLists[i].AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                if (addressLists[i].AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                 {
                     //处理当前的IPV4地址
                 }
             }
+        }
+
+        private void Btn_Close_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Btn_Minisize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }
