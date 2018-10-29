@@ -124,6 +124,8 @@ namespace IPScanner
                 {
                     IPHostEntry entry = Dns.GetHostEntry(tmpIp);
                     info.HostName = entry.HostName;
+
+
                 }
                 catch (Exception)
                 {

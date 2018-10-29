@@ -22,7 +22,7 @@ namespace IPScanner
             iP_Start = new IPAddress(IPBox_BeginAddress.GetAddressBytes());
             iP_End = new IPAddress(IPBox_EndAddress.GetAddressBytes());
             AddressesList = GetAddresses(iP_Start.ToString(), iP_End.ToString());
-
+            SetInfo("共 " + AddressesList.Count + " 个");
             if (AddressesList == null)
             {
                 //输入不正确
@@ -41,6 +41,11 @@ namespace IPScanner
 
             listView1.EndUpdate();
 
+        }
+
+        private void SetInfo(string message)
+        {
+            Lbl_Status.Text = message;
         }
 
         private bool CheckIPAddress()
@@ -98,7 +103,7 @@ namespace IPScanner
                         //最后
                         else
                         {
-                            for (int j = section_Start.Section4; j <= section_End.Section4; j++)
+                            for (int j = 1; j <= section_End.Section4; j++)
                             {
                                 addressesList.Add(section_Start.Section1 + "." + section_Start.Section2 + "." + i.ToString() + "." + j.ToString());
                             }
@@ -175,6 +180,12 @@ namespace IPScanner
         private void Btn_Minisize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void TextBox_ThreadCount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+                e.Handled = true;
         }
     }
 }
