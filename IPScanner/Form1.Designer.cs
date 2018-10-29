@@ -42,15 +42,16 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.TextBox_ThreadCount = new System.Windows.Forms.TextBox();
             this.Lbl_ThreadCount = new System.Windows.Forms.Label();
             this.Btn_Scan = new System.Windows.Forms.Button();
             this.IPBox_EndAddress = new IPAddressControlLib.IPAddressControl();
             this.IPBox_BeginAddress = new IPAddressControlLib.IPAddressControl();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.Lbl_Status = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Panel_Title.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Minisize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Close)).BeginInit();
@@ -66,16 +67,18 @@
             this.Panel_Title.Controls.Add(this.Lbl_Title);
             this.Panel_Title.Dock = System.Windows.Forms.DockStyle.Top;
             this.Panel_Title.Location = new System.Drawing.Point(0, 0);
+            this.Panel_Title.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Panel_Title.Name = "Panel_Title";
-            this.Panel_Title.Size = new System.Drawing.Size(765, 35);
+            this.Panel_Title.Size = new System.Drawing.Size(1020, 44);
             this.Panel_Title.TabIndex = 0;
             // 
             // Btn_Minisize
             // 
             this.Btn_Minisize.Image = global::IPScanner.Properties.Resources.Btn_MiniSize;
-            this.Btn_Minisize.Location = new System.Drawing.Point(697, 6);
+            this.Btn_Minisize.Location = new System.Drawing.Point(929, 8);
+            this.Btn_Minisize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Btn_Minisize.Name = "Btn_Minisize";
-            this.Btn_Minisize.Size = new System.Drawing.Size(25, 23);
+            this.Btn_Minisize.Size = new System.Drawing.Size(33, 29);
             this.Btn_Minisize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.Btn_Minisize.TabIndex = 4;
             this.Btn_Minisize.TabStop = false;
@@ -84,9 +87,10 @@
             // Btn_Close
             // 
             this.Btn_Close.Image = global::IPScanner.Properties.Resources.Btn_Close;
-            this.Btn_Close.Location = new System.Drawing.Point(728, 6);
+            this.Btn_Close.Location = new System.Drawing.Point(971, 8);
+            this.Btn_Close.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Btn_Close.Name = "Btn_Close";
-            this.Btn_Close.Size = new System.Drawing.Size(25, 23);
+            this.Btn_Close.Size = new System.Drawing.Size(33, 29);
             this.Btn_Close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.Btn_Close.TabIndex = 3;
             this.Btn_Close.TabStop = false;
@@ -97,9 +101,10 @@
             this.Lbl_Title.AutoSize = true;
             this.Lbl_Title.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Lbl_Title.ForeColor = System.Drawing.Color.Snow;
-            this.Lbl_Title.Location = new System.Drawing.Point(8, 9);
+            this.Lbl_Title.Location = new System.Drawing.Point(11, 11);
+            this.Lbl_Title.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Title.Name = "Lbl_Title";
-            this.Lbl_Title.Size = new System.Drawing.Size(103, 17);
+            this.Lbl_Title.Size = new System.Drawing.Size(127, 20);
             this.Lbl_Title.TabIndex = 3;
             this.Lbl_Title.Text = "局域网IP扫描工具";
             // 
@@ -113,10 +118,10 @@
             this.columnHeader5});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(0, 64);
+            this.listView1.Location = new System.Drawing.Point(0, 81);
             this.listView1.Margin = new System.Windows.Forms.Padding(0);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(765, 345);
+            this.listView1.Size = new System.Drawing.Size(1020, 432);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -167,15 +172,26 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(765, 64);
+            this.panel2.Size = new System.Drawing.Size(1020, 81);
             this.panel2.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(324, 31);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(15, 15);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "-";
             // 
             // TextBox_ThreadCount
             // 
             this.TextBox_ThreadCount.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.TextBox_ThreadCount.Location = new System.Drawing.Point(479, 20);
+            this.TextBox_ThreadCount.Location = new System.Drawing.Point(639, 25);
+            this.TextBox_ThreadCount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TextBox_ThreadCount.Name = "TextBox_ThreadCount";
-            this.TextBox_ThreadCount.Size = new System.Drawing.Size(117, 23);
+            this.TextBox_ThreadCount.Size = new System.Drawing.Size(71, 27);
             this.TextBox_ThreadCount.TabIndex = 4;
             this.TextBox_ThreadCount.Text = "2";
             this.TextBox_ThreadCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_ThreadCount_KeyPress);
@@ -184,9 +200,10 @@
             // 
             this.Lbl_ThreadCount.AutoSize = true;
             this.Lbl_ThreadCount.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Lbl_ThreadCount.Location = new System.Drawing.Point(419, 23);
+            this.Lbl_ThreadCount.Location = new System.Drawing.Point(559, 29);
+            this.Lbl_ThreadCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_ThreadCount.Name = "Lbl_ThreadCount";
-            this.Lbl_ThreadCount.Size = new System.Drawing.Size(56, 17);
+            this.Lbl_ThreadCount.Size = new System.Drawing.Size(69, 20);
             this.Lbl_ThreadCount.TabIndex = 3;
             this.Lbl_ThreadCount.Text = "线程数：";
             // 
@@ -197,9 +214,10 @@
             this.Btn_Scan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Scan.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Btn_Scan.ForeColor = System.Drawing.Color.Snow;
-            this.Btn_Scan.Location = new System.Drawing.Point(678, 17);
+            this.Btn_Scan.Location = new System.Drawing.Point(904, 21);
+            this.Btn_Scan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Btn_Scan.Name = "Btn_Scan";
-            this.Btn_Scan.Size = new System.Drawing.Size(75, 28);
+            this.Btn_Scan.Size = new System.Drawing.Size(100, 35);
             this.Btn_Scan.TabIndex = 2;
             this.Btn_Scan.Text = "扫描";
             this.Btn_Scan.UseVisualStyleBackColor = false;
@@ -213,11 +231,12 @@
             this.IPBox_EndAddress.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.IPBox_EndAddress.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.IPBox_EndAddress.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IPBox_EndAddress.Location = new System.Drawing.Point(257, 20);
-            this.IPBox_EndAddress.MinimumSize = new System.Drawing.Size(99, 23);
+            this.IPBox_EndAddress.Location = new System.Drawing.Point(343, 25);
+            this.IPBox_EndAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.IPBox_EndAddress.MinimumSize = new System.Drawing.Size(126, 27);
             this.IPBox_EndAddress.Name = "IPBox_EndAddress";
             this.IPBox_EndAddress.ReadOnly = false;
-            this.IPBox_EndAddress.Size = new System.Drawing.Size(135, 23);
+            this.IPBox_EndAddress.Size = new System.Drawing.Size(189, 27);
             this.IPBox_EndAddress.TabIndex = 1;
             this.IPBox_EndAddress.Text = "192.168.2.2";
             // 
@@ -229,11 +248,12 @@
             this.IPBox_BeginAddress.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.IPBox_BeginAddress.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.IPBox_BeginAddress.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IPBox_BeginAddress.Location = new System.Drawing.Point(101, 20);
-            this.IPBox_BeginAddress.MinimumSize = new System.Drawing.Size(99, 23);
+            this.IPBox_BeginAddress.Location = new System.Drawing.Point(135, 25);
+            this.IPBox_BeginAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.IPBox_BeginAddress.MinimumSize = new System.Drawing.Size(126, 27);
             this.IPBox_BeginAddress.Name = "IPBox_BeginAddress";
             this.IPBox_BeginAddress.ReadOnly = false;
-            this.IPBox_BeginAddress.Size = new System.Drawing.Size(135, 23);
+            this.IPBox_BeginAddress.Size = new System.Drawing.Size(186, 27);
             this.IPBox_BeginAddress.TabIndex = 0;
             this.IPBox_BeginAddress.Text = "192.168.1.1";
             // 
@@ -241,21 +261,13 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(9, 23);
+            this.label1.Location = new System.Drawing.Point(12, 29);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 17);
+            this.label1.Size = new System.Drawing.Size(97, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "扫描的IP段：";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(242, 25);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(11, 12);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "-";
             // 
             // tableLayoutPanel1
             // 
@@ -266,34 +278,41 @@
             this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.Lbl_Status, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 35);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 44);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(765, 432);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1020, 540);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // Lbl_Status
             // 
             this.Lbl_Status.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.Lbl_Status.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Lbl_Status.Location = new System.Drawing.Point(3, 409);
+            this.Lbl_Status.Location = new System.Drawing.Point(4, 513);
+            this.Lbl_Status.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Status.Name = "Lbl_Status";
-            this.Lbl_Status.Size = new System.Drawing.Size(759, 23);
+            this.Lbl_Status.Size = new System.Drawing.Size(1012, 27);
             this.Lbl_Status.TabIndex = 3;
             this.Lbl_Status.Text = "...";
             this.Lbl_Status.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 467);
+            this.ClientSize = new System.Drawing.Size(1020, 584);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.Panel_Title);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
@@ -332,6 +351,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label Lbl_Status;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

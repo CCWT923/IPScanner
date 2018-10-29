@@ -9,18 +9,21 @@ namespace IPScanner
 {
     class ProcessIP
     {
-        public ProcessIP(List<string> AddList)
+        public ProcessIP(List<string> AddList, int t_count = 2)
         {
-            _addressInfoList = new List<AddressInfo>();
-            ThreadCount = 2;
+            _addressInfoList = new List<Pub.AddressInfo>();
+            ThreadCount = t_count;
             _AddressList = AddList;
+            _AddressCount = AddList.Count;
         }
-
+        private int _AddressCount;
         private List<string> _AddressList;
         private int _ThreadCount = 2;
-        private List<AddressInfo> _addressInfoList;
+        private List<Pub.AddressInfo> _addressInfoList;
         private int _MaxThreadCount = 200;
         private int _ProcessedCount = 0;
+        private Timer timer;
+        private bool _IsDone = false;
 
         /// <summary>
         /// 已处理的数量
@@ -32,17 +35,17 @@ namespace IPScanner
                 return _ProcessedCount;
             }
         }
-
         /// <summary>
-        /// 返回处理后的IP地址的信息
+        /// 获取已处理的地址信息
         /// </summary>
-        public struct AddressInfo
+        public List<Pub.AddressInfo> AddressInfoList
         {
-            public string Address;
-            public bool IsOnline;
-            public string MacAddress;
-            public string HostName;
+            get
+            {
+                return _addressInfoList;
+            }
         }
+
 
         /// <summary>
         /// 设置或者获取用于计算的线程数
@@ -84,10 +87,30 @@ namespace IPScanner
         /// </summary>
         public void Start()
         {
+            //启动定时器监视
+            timer = new Timer(new TimerCallback(Monitor), null, 0, 500);
             for(int i = 0; i < ThreadCount; i++)
             {
                 Thread thread = new Thread(new ThreadStart(GetAddressInfo));
                 thread.Start();
+            }
+        }
+        /// <summary>
+        /// 是否处理完成
+        /// </summary>
+        public bool IsDone
+        {
+            get
+            {
+                return _IsDone;
+            }
+        }
+        
+        private void Monitor(object o)
+        {
+            if(_ProcessedCount == _AddressCount)
+            {
+                _IsDone = true;
             }
         }
 
@@ -113,7 +136,7 @@ namespace IPScanner
             IPAddress iPAddress = IPAddress.Parse(tmpIp);
             Ping pingSender = new Ping();
             PingReply reply = pingSender.Send(iPAddress, 200);
-            AddressInfo info = new AddressInfo();
+            Pub.AddressInfo info = new Pub.AddressInfo();
             info.Address = tmpIp;
             //是否连通
             if(reply.Status == IPStatus.Success)
@@ -124,7 +147,6 @@ namespace IPScanner
                 {
                     IPHostEntry entry = Dns.GetHostEntry(tmpIp);
                     info.HostName = entry.HostName;
-
 
                 }
                 catch (Exception)
@@ -143,6 +165,7 @@ namespace IPScanner
             _ProcessedCount++;
         }
 
+        #region 使用API获取指定IP的MAC地址
         /// <summary>
         /// 使用ARP获取Mac地址
         /// </summary>
@@ -168,6 +191,6 @@ namespace IPScanner
             byte[] bytes1 = BitConverter.GetBytes(pMacAdd);
             return BitConverter.ToString(bytes1, 0, 6);
         }
-
+        #endregion
     }
 }

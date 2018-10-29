@@ -15,9 +15,12 @@ namespace IPScanner
         IPAddress iP_Start;
         IPAddress iP_End;
         List<String> AddressesList;
+        System.Threading.Timer timer;
 
         private void Btn_Scan_Click(object sender, EventArgs e)
         {
+            Btn_Scan.Enabled = false;
+            
             listView1.Items.Clear();
             iP_Start = new IPAddress(IPBox_BeginAddress.GetAddressBytes());
             iP_End = new IPAddress(IPBox_EndAddress.GetAddressBytes());
@@ -27,20 +30,41 @@ namespace IPScanner
             {
                 //输入不正确
             }
-            Random random = new Random(DateTime.Now.Millisecond);
+            //Random random = new Random(DateTime.Now.Millisecond);
+            timer1.Interval = 300;
+            timer1.Enabled = true;
+            ipProcessor = new ProcessIP(AddressesList, 5);
+            ipProcessor.Start();
+        }
+
+        ProcessIP ipProcessor;
+        /// <summary>
+        /// 填充ListView
+        /// </summary>
+        private void FillList(List<Pub.AddressInfo> addressInfos)
+        {
             listView1.BeginUpdate();//防止闪烁
             ListViewItem mainItem;
-            
-            for (int i = 0; i < AddressesList.Count; i++)
+
+            for (int i = 0; i < addressInfos.Count; i++)
             {
                 mainItem = listView1.Items.Add("");
-                mainItem.SubItems.Add((i + 1).ToString());
-                mainItem.SubItems.Add(AddressesList[i]);
-                listView1.Items[i].ImageIndex = i % 2;
+                mainItem.SubItems.Add((i + 1).ToString()); //序号
+                mainItem.SubItems.Add(addressInfos[i].Address); //IP地址
+                mainItem.SubItems.Add(addressInfos[i].MacAddress); //MAC地址
+                mainItem.SubItems.Add(addressInfos[i].HostName);//主机名
+                if(addressInfos[i].IsOnline)
+                {
+                    listView1.Items[i].ImageIndex = 0;
+                }
+                else
+                {
+                    listView1.Items[i].ImageIndex = 1;
+                }
+                
             }
 
             listView1.EndUpdate();
-
         }
 
         private void SetInfo(string message)
@@ -186,6 +210,16 @@ namespace IPScanner
         {
             if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8)
                 e.Handled = true;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            SetInfo("正在处理第 " + ipProcessor.ProcessedCount + " 个，共计 " + AddressesList.Count + " 个。");
+            if (ipProcessor.IsDone)
+            {
+                FillList(ipProcessor.AddressInfoList);
+                Btn_Scan.Enabled = true;
+            }
         }
     }
 }
