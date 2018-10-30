@@ -9,7 +9,7 @@ namespace IPScanner
 {
     class ProcessIP
     {
-        public ProcessIP(List<string> AddList, int t_count = 2)
+        public ProcessIP(List<string> AddList, int t_count)
         {
             _addressInfoList = new List<Pub.AddressInfo>();
             ThreadCount = t_count;
@@ -68,7 +68,7 @@ namespace IPScanner
                 }
                 else
                 {
-                    _ThreadCount = 0;
+                    _ThreadCount = value;
                 }
             }
         }
@@ -89,11 +89,13 @@ namespace IPScanner
         {
             //启动定时器监视
             timer = new Timer(new TimerCallback(Monitor), null, 0, 500);
-            for(int i = 0; i < ThreadCount; i++)
+            for (int i = 0; i < ThreadCount; i++)
             {
                 Thread thread = new Thread(new ThreadStart(GetAddressInfo));
                 thread.Start();
             }
+            //Thread thread = new Thread(new ThreadStart(GetAddressInfo));
+            //thread.Start();
         }
         /// <summary>
         /// 是否处理完成
@@ -120,49 +122,52 @@ namespace IPScanner
         private void GetAddressInfo()
         {
             string tmpIp = "";
-            lock (this)
+            while (_AddressList.Count > 0)
             {
-                if(_AddressList.Count > 0)
+                lock (this)
                 {
-                    tmpIp = _AddressList[0];
-                    _AddressList.RemoveAt(0);
+                    if (_AddressList.Count > 0)
+                    {
+                        tmpIp = _AddressList[0];
+                        _AddressList.RemoveAt(0);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+                IPAddress iPAddress = IPAddress.Parse(tmpIp);
+                Ping pingSender = new Ping();
+                PingReply reply = pingSender.Send(iPAddress, 200);
+                Pub.AddressInfo info = new Pub.AddressInfo();
+                info.Address = tmpIp;
+                //是否连通
+                if (reply.Status == IPStatus.Success)
+                {
+                    info.IsOnline = true;
+                    //获取主机名
+                    try
+                    {
+                        IPHostEntry entry = Dns.GetHostEntry(tmpIp);
+                        info.HostName = entry.HostName;
+
+                    }
+                    catch (Exception)
+                    {
+                        info.HostName = "";
+                    }
+                    //获取MAC地址
+                    info.MacAddress = GetMac(tmpIp);
                 }
                 else
                 {
-                    return;
+                    info.IsOnline = false;
                 }
-            }
 
-            IPAddress iPAddress = IPAddress.Parse(tmpIp);
-            Ping pingSender = new Ping();
-            PingReply reply = pingSender.Send(iPAddress, 200);
-            Pub.AddressInfo info = new Pub.AddressInfo();
-            info.Address = tmpIp;
-            //是否连通
-            if(reply.Status == IPStatus.Success)
-            {
-                info.IsOnline = true;
-                //获取主机名
-                try
-                {
-                    IPHostEntry entry = Dns.GetHostEntry(tmpIp);
-                    info.HostName = entry.HostName;
-
-                }
-                catch (Exception)
-                {
-                    info.HostName = "";
-                }
-                //获取MAC地址
-                info.MacAddress = GetMac(tmpIp);
+                _addressInfoList.Add(info);
+                _ProcessedCount++;
             }
-            else
-            {
-                info.IsOnline = false;
-            }
-            
-            _addressInfoList.Add(info);
-            _ProcessedCount++;
         }
 
         #region 使用API获取指定IP的MAC地址
@@ -189,6 +194,7 @@ namespace IPScanner
             uint phyAddLen = 6;
             uint err = SendARP(destIP,0,ref pMacAdd,ref phyAddLen);
             byte[] bytes1 = BitConverter.GetBytes(pMacAdd);
+            //Console.WriteLine(err);
             return BitConverter.ToString(bytes1, 0, 6);
         }
         #endregion

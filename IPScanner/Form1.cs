@@ -15,7 +15,6 @@ namespace IPScanner
         IPAddress iP_Start;
         IPAddress iP_End;
         List<String> AddressesList;
-        System.Threading.Timer timer;
 
         private void Btn_Scan_Click(object sender, EventArgs e)
         {
@@ -33,7 +32,7 @@ namespace IPScanner
             //Random random = new Random(DateTime.Now.Millisecond);
             timer1.Interval = 300;
             timer1.Enabled = true;
-            ipProcessor = new ProcessIP(AddressesList, 5);
+            ipProcessor = new ProcessIP(AddressesList, int.Parse(TextBox_ThreadCount.Text));
             ipProcessor.Start();
         }
 
@@ -212,13 +211,15 @@ namespace IPScanner
                 e.Handled = true;
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Timer1_Tick(object sender, EventArgs e)
         {
-            SetInfo("正在处理第 " + ipProcessor.ProcessedCount + " 个，共计 " + AddressesList.Count + " 个。");
+            SetInfo("正在处理第 " + ipProcessor.ProcessedCount + " 个，剩余 " + AddressesList.Count + " 个。");
             if (ipProcessor.IsDone)
             {
                 FillList(ipProcessor.AddressInfoList);
                 Btn_Scan.Enabled = true;
+                timer1.Enabled = false;
+                SetInfo("扫描完成。");
             }
         }
     }
