@@ -34,12 +34,6 @@
             this.Btn_Minisize = new System.Windows.Forms.PictureBox();
             this.Btn_Close = new System.Windows.Forms.PictureBox();
             this.Lbl_Title = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,8 +45,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.Lbl_Status = new System.Windows.Forms.Label();
+            this.ProgressBar1 = new ProgressBarWithText.ProgressBarWithText();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.listView1 = new System.Windows.Forms.ListView();
             this.Panel_Title.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Minisize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Close)).BeginInit();
@@ -105,51 +106,6 @@
             this.Lbl_Title.TabIndex = 3;
             this.Lbl_Title.Text = "局域网IP扫描工具";
             // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5,
-            this.columnHeader6});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(0, 64);
-            this.listView1.Margin = new System.Windows.Forms.Padding(0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(765, 345);
-            this.listView1.SmallImageList = this.imageList1;
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "#";
-            this.columnHeader1.Width = 20;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "序号";
-            this.columnHeader2.Width = 40;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "IP地址";
-            this.columnHeader3.Width = 150;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "MAC地址";
-            this.columnHeader4.Width = 180;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "主机名";
-            this.columnHeader5.Width = 180;
-            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -159,6 +115,7 @@
             // 
             // panel2
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.panel2, 2);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.TextBox_ThreadCount);
             this.panel2.Controls.Add(this.Lbl_ThreadCount);
@@ -263,11 +220,13 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
             this.tableLayoutPanel1.Controls.Add(this.listView1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.Lbl_Status, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.ProgressBar1, 1, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 35);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -284,19 +243,84 @@
             this.Lbl_Status.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Lbl_Status.Location = new System.Drawing.Point(3, 409);
             this.Lbl_Status.Name = "Lbl_Status";
-            this.Lbl_Status.Size = new System.Drawing.Size(759, 23);
+            this.Lbl_Status.Size = new System.Drawing.Size(261, 23);
             this.Lbl_Status.TabIndex = 3;
-            this.Lbl_Status.Text = "...";
+            this.Lbl_Status.Text = "准备就绪。";
             this.Lbl_Status.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // ProgressBar1
+            // 
+            this.ProgressBar1.BackgroundColor = System.Drawing.Color.White;
+            this.ProgressBar1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ProgressBar1.DisplayMode = ProgressBarWithText.ProgressBarWithText.ValueDisplayMode.Percent;
+            this.ProgressBar1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ProgressBar1.ForegroundColor = System.Drawing.Color.DodgerBlue;
+            this.ProgressBar1.Location = new System.Drawing.Point(267, 409);
+            this.ProgressBar1.Margin = new System.Windows.Forms.Padding(0);
+            this.ProgressBar1.MaxValue = 100;
+            this.ProgressBar1.Name = "ProgressBar1";
+            this.ProgressBar1.SetFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.ProgressBar1.ShowText = true;
+            this.ProgressBar1.Size = new System.Drawing.Size(498, 23);
+            this.ProgressBar1.TabIndex = 4;
+            this.ProgressBar1.TextAlignment = ProgressBarWithText.ProgressBarWithText.TextAlignmentStyle.Center;
+            this.ProgressBar1.UseDecimal = false;
+            this.ProgressBar1.Value = 0;
             // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "#";
+            this.columnHeader1.Width = 20;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "序号";
+            this.columnHeader2.Width = 40;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "IP地址";
+            this.columnHeader3.Width = 150;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "MAC地址";
+            this.columnHeader4.Width = 180;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "主机名";
+            this.columnHeader5.Width = 180;
+            // 
             // columnHeader6
             // 
             this.columnHeader6.Text = "备注";
             this.columnHeader6.Width = 116;
+            // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
+            this.tableLayoutPanel1.SetColumnSpan(this.listView1, 2);
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.FullRowSelect = true;
+            this.listView1.Location = new System.Drawing.Point(0, 64);
+            this.listView1.Margin = new System.Windows.Forms.Padding(0);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(765, 345);
+            this.listView1.SmallImageList = this.imageList1;
+            this.listView1.TabIndex = 1;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
             // 
             // Form1
             // 
@@ -324,18 +348,12 @@
         #endregion
 
         private System.Windows.Forms.Panel Panel_Title;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label Lbl_Title;
         private System.Windows.Forms.Label label1;
         private IPAddressControlLib.IPAddressControl IPBox_BeginAddress;
         private IPAddressControlLib.IPAddressControl IPBox_EndAddress;
         private System.Windows.Forms.Button Btn_Scan;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.PictureBox Btn_Close;
         private System.Windows.Forms.PictureBox Btn_Minisize;
@@ -345,6 +363,13 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label Lbl_Status;
         private System.Windows.Forms.Timer timer1;
+        private ProgressBarWithText.ProgressBarWithText ProgressBar1;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
     }
 }

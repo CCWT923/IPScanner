@@ -24,7 +24,7 @@ namespace IPScanner
             iP_Start = new IPAddress(IPBox_BeginAddress.GetAddressBytes());
             iP_End = new IPAddress(IPBox_EndAddress.GetAddressBytes());
             AddressesList = GetAddresses(iP_Start.ToString(), iP_End.ToString());
-            SetInfo("共 " + AddressesList.Count + " 个");
+            ProgressBar1.MaxValue = AddressesList.Count;
             if (AddressesList == null)
             {
                 //输入不正确
@@ -214,12 +214,13 @@ namespace IPScanner
         private void Timer1_Tick(object sender, EventArgs e)
         {
             SetInfo("正在处理第 " + ipProcessor.ProcessedCount + " 个，剩余 " + AddressesList.Count + " 个。");
+            ProgressBar1.Value = ipProcessor.ProcessedCount;
             if (ipProcessor.IsDone)
             {
                 FillList(ipProcessor.AddressInfoList);
                 Btn_Scan.Enabled = true;
                 timer1.Enabled = false;
-                SetInfo("扫描完成。");
+                SetInfo("扫描完成，在线 " + ipProcessor.OnlineCount + " 个" + "；离线 " + ipProcessor.OfflineCount + " 个。");
             }
         }
     }

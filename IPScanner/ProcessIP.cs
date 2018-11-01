@@ -24,6 +24,8 @@ namespace IPScanner
         private int _ProcessedCount = 0;
         private Timer timer;
         private bool _IsDone = false;
+        private int _OnlineCount = 0;
+        private int _OfflineCount = 0;
 
         /// <summary>
         /// 已处理的数量
@@ -33,6 +35,26 @@ namespace IPScanner
             get
             {
                 return _ProcessedCount;
+            }
+        }
+        /// <summary>
+        /// 在线主机数量
+        /// </summary>
+        public int OnlineCount
+        {
+            get
+            {
+                return _OnlineCount;
+            }
+        }
+        /// <summary>
+        /// 离线主机数
+        /// </summary>
+        public int OfflineCount
+        {
+            get
+            {
+                return _OfflineCount;
             }
         }
         /// <summary>
@@ -145,6 +167,7 @@ namespace IPScanner
                 //是否连通
                 if (reply.Status == IPStatus.Success)
                 {
+                    _OnlineCount++;
                     info.IsOnline = true;
                     //获取主机名
                     try
@@ -163,6 +186,7 @@ namespace IPScanner
                 else
                 {
                     info.IsOnline = false;
+                    _OfflineCount++;
                 }
 
                 _addressInfoList.Add(info);
