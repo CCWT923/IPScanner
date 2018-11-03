@@ -44,21 +44,28 @@
             this.IPBox_BeginAddress = new IPAddressControlLib.IPAddressControl();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.Lbl_Status = new System.Windows.Forms.Label();
-            this.ProgressBar1 = new ProgressBarWithText.ProgressBarWithText();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.Lbl_Status = new System.Windows.Forms.Label();
+            this.ProgressBar1 = new ProgressBarWithText.ProgressBarWithText();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuItem_Filter = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItem_OnlineHost = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItem_Mac = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItem_HostName = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItem_All = new System.Windows.Forms.ToolStripMenuItem();
             this.Panel_Title.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Minisize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Close)).BeginInit();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Panel_Title
@@ -147,6 +154,7 @@
             this.TextBox_ThreadCount.Size = new System.Drawing.Size(54, 23);
             this.TextBox_ThreadCount.TabIndex = 4;
             this.TextBox_ThreadCount.Text = "2";
+            this.TextBox_ThreadCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TextBox_ThreadCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_ThreadCount_KeyPress);
             // 
             // Lbl_ThreadCount
@@ -237,6 +245,58 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(765, 432);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
+            this.tableLayoutPanel1.SetColumnSpan(this.listView1, 2);
+            this.listView1.ContextMenuStrip = this.contextMenuStrip1;
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.FullRowSelect = true;
+            this.listView1.Location = new System.Drawing.Point(0, 64);
+            this.listView1.Margin = new System.Windows.Forms.Padding(0);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(765, 345);
+            this.listView1.SmallImageList = this.imageList1;
+            this.listView1.TabIndex = 1;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "#";
+            this.columnHeader1.Width = 20;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "序号";
+            this.columnHeader2.Width = 40;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "IP地址";
+            this.columnHeader3.Width = 150;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "MAC地址";
+            this.columnHeader4.Width = 180;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "主机名";
+            this.columnHeader5.Width = 180;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "备注";
+            this.columnHeader6.Width = 116;
+            // 
             // Lbl_Status
             // 
             this.Lbl_Status.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
@@ -271,56 +331,48 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
-            // columnHeader1
+            // contextMenuStrip1
             // 
-            this.columnHeader1.Text = "#";
-            this.columnHeader1.Width = 20;
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItem_Filter});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
             // 
-            // columnHeader2
+            // MenuItem_Filter
             // 
-            this.columnHeader2.Text = "序号";
-            this.columnHeader2.Width = 40;
+            this.MenuItem_Filter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItem_OnlineHost,
+            this.MenuItem_Mac,
+            this.MenuItem_HostName,
+            this.MenuItem_All});
+            this.MenuItem_Filter.Name = "MenuItem_Filter";
+            this.MenuItem_Filter.Size = new System.Drawing.Size(152, 22);
+            this.MenuItem_Filter.Text = "筛选";
             // 
-            // columnHeader3
+            // MenuItem_OnlineHost
             // 
-            this.columnHeader3.Text = "IP地址";
-            this.columnHeader3.Width = 150;
+            this.MenuItem_OnlineHost.Name = "MenuItem_OnlineHost";
+            this.MenuItem_OnlineHost.Size = new System.Drawing.Size(152, 22);
+            this.MenuItem_OnlineHost.Text = "在线主机";
+            this.MenuItem_OnlineHost.Click += new System.EventHandler(this.MenuItem_OnlineHost_Click);
             // 
-            // columnHeader4
+            // MenuItem_Mac
             // 
-            this.columnHeader4.Text = "MAC地址";
-            this.columnHeader4.Width = 180;
+            this.MenuItem_Mac.Name = "MenuItem_Mac";
+            this.MenuItem_Mac.Size = new System.Drawing.Size(152, 22);
+            this.MenuItem_Mac.Text = "MAC地址";
             // 
-            // columnHeader5
+            // MenuItem_HostName
             // 
-            this.columnHeader5.Text = "主机名";
-            this.columnHeader5.Width = 180;
+            this.MenuItem_HostName.Name = "MenuItem_HostName";
+            this.MenuItem_HostName.Size = new System.Drawing.Size(152, 22);
+            this.MenuItem_HostName.Text = "主机名";
             // 
-            // columnHeader6
+            // MenuItem_All
             // 
-            this.columnHeader6.Text = "备注";
-            this.columnHeader6.Width = 116;
-            // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5,
-            this.columnHeader6});
-            this.tableLayoutPanel1.SetColumnSpan(this.listView1, 2);
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(0, 64);
-            this.listView1.Margin = new System.Windows.Forms.Padding(0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(765, 345);
-            this.listView1.SmallImageList = this.imageList1;
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.MenuItem_All.Name = "MenuItem_All";
+            this.MenuItem_All.Size = new System.Drawing.Size(152, 22);
+            this.MenuItem_All.Text = "所有地址";
             // 
             // Form1
             // 
@@ -341,6 +393,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -371,6 +424,12 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem MenuItem_Filter;
+        private System.Windows.Forms.ToolStripMenuItem MenuItem_OnlineHost;
+        private System.Windows.Forms.ToolStripMenuItem MenuItem_Mac;
+        private System.Windows.Forms.ToolStripMenuItem MenuItem_HostName;
+        private System.Windows.Forms.ToolStripMenuItem MenuItem_All;
     }
 }
 

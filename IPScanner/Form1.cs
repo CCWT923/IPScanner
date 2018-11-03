@@ -55,10 +55,12 @@ namespace IPScanner
                 if(addressInfos[i].IsOnline)
                 {
                     listView1.Items[i].ImageIndex = 0;
+                    listView1.Items[i].Tag = "ONLINE";
                 }
                 else
                 {
                     listView1.Items[i].ImageIndex = 1;
+                    listView1.Items[i].Tag = "OFFLINE";
                 }
                 
             }
@@ -204,7 +206,11 @@ namespace IPScanner
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
+        /// <summary>
+        /// 只允许输入数字和退格键
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBox_ThreadCount_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8)
@@ -223,5 +229,21 @@ namespace IPScanner
                 SetInfo("扫描完成，在线 " + ipProcessor.OnlineCount + " 个" + "；离线 " + ipProcessor.OfflineCount + " 个。");
             }
         }
+        #region 菜单功能
+        private void MenuItem_OnlineHost_Click(object sender, EventArgs e)
+        {
+
+            if (listView1.Items.Count > 0)
+            {
+                foreach (ListViewItem l in listView1.Items)
+                {
+                    if (l.Tag.ToString() == "OFFLINE")
+                    {
+                        l.Remove();
+                    }
+                }
+            }
+        }
+        #endregion
     }
 }

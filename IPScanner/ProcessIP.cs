@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Diagnostics;
 
 namespace IPScanner
 {
@@ -68,7 +69,6 @@ namespace IPScanner
             }
         }
 
-
         /// <summary>
         /// 设置或者获取用于计算的线程数
         /// </summary>
@@ -114,6 +114,7 @@ namespace IPScanner
             for (int i = 0; i < ThreadCount; i++)
             {
                 Thread thread = new Thread(new ThreadStart(GetAddressInfo));
+                thread.Name = "Thread#"+(i+1).ToString();
                 thread.Start();
             }
             //Thread thread = new Thread(new ThreadStart(GetAddressInfo));
@@ -132,7 +133,7 @@ namespace IPScanner
         
         private void Monitor(object o)
         {
-            if(_ProcessedCount == _AddressCount)
+            if(_ProcessedCount == _AddressCount || _AddressList.Count == 0)
             {
                 _IsDone = true;
             }
@@ -146,7 +147,7 @@ namespace IPScanner
             string tmpIp = "";
             while (_AddressList.Count > 0)
             {
-                lock (this)
+                lock (_AddressList)
                 {
                     if (_AddressList.Count > 0)
                     {
@@ -157,7 +158,9 @@ namespace IPScanner
                     {
                         return;
                     }
+                    //Debug.WriteLine("lock内部：已处理 " + _addressInfoList.Count + " 个。");
                 }
+                //Debug.WriteLine("lock外部：已处理 " + _addressInfoList.Count + " 个。");
 
                 IPAddress iPAddress = IPAddress.Parse(tmpIp);
                 Ping pingSender = new Ping();
@@ -191,6 +194,7 @@ namespace IPScanner
 
                 _addressInfoList.Add(info);
                 _ProcessedCount++;
+                Debug.WriteLine(Thread.CurrentThread.Name + " " + Thread.CurrentThread.ThreadState.ToString() + "。已处理："  + _ProcessedCount + " 个，合计：" + _AddressCount);
             }
         }
 
@@ -222,5 +226,6 @@ namespace IPScanner
             return BitConverter.ToString(bytes1, 0, 6);
         }
         #endregion
+
     }
 }
