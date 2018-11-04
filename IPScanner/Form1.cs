@@ -196,16 +196,6 @@ namespace IPScanner
                 }
             }
         }
-
-        private void Btn_Close_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void Btn_Minisize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
         /// <summary>
         /// 只允许输入数字和退格键
         /// </summary>
@@ -245,5 +235,15 @@ namespace IPScanner
             }
         }
         #endregion
+
+        private void Btn_Minisize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void Btn_Close_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

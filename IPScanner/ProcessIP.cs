@@ -158,9 +158,7 @@ namespace IPScanner
                     {
                         return;
                     }
-                    //Debug.WriteLine("lock内部：已处理 " + _addressInfoList.Count + " 个。");
                 }
-                //Debug.WriteLine("lock外部：已处理 " + _addressInfoList.Count + " 个。");
 
                 IPAddress iPAddress = IPAddress.Parse(tmpIp);
                 Ping pingSender = new Ping();

@@ -87,11 +87,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Btn_Close.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Btn_MiniSize.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

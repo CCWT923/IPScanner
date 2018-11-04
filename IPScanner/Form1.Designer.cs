@@ -31,8 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Panel_Title = new System.Windows.Forms.Panel();
-            this.Btn_Minisize = new System.Windows.Forms.PictureBox();
-            this.Btn_Close = new System.Windows.Forms.PictureBox();
+            this.Btn_Minisize = new System.Windows.Forms.Button();
+            this.Btn_Close = new System.Windows.Forms.Button();
             this.Lbl_Title = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
@@ -51,18 +51,16 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Lbl_Status = new System.Windows.Forms.Label();
-            this.ProgressBar1 = new ProgressBarWithText.ProgressBarWithText();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MenuItem_Filter = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItem_OnlineHost = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItem_Mac = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItem_HostName = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItem_All = new System.Windows.Forms.ToolStripMenuItem();
+            this.Lbl_Status = new System.Windows.Forms.Label();
+            this.ProgressBar1 = new ProgressBarWithText.ProgressBarWithText();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Panel_Title.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Btn_Minisize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Btn_Close)).BeginInit();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -82,24 +80,35 @@
             // 
             // Btn_Minisize
             // 
-            this.Btn_Minisize.Image = global::IPScanner.Properties.Resources.Btn_MiniSize;
-            this.Btn_Minisize.Location = new System.Drawing.Point(697, 6);
+            this.Btn_Minisize.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.Btn_Minisize.FlatAppearance.BorderSize = 0;
+            this.Btn_Minisize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.Btn_Minisize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSkyBlue;
+            this.Btn_Minisize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Minisize.ForeColor = System.Drawing.Color.White;
+            this.Btn_Minisize.Location = new System.Drawing.Point(684, 6);
             this.Btn_Minisize.Name = "Btn_Minisize";
-            this.Btn_Minisize.Size = new System.Drawing.Size(25, 23);
-            this.Btn_Minisize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.Btn_Minisize.TabIndex = 4;
-            this.Btn_Minisize.TabStop = false;
+            this.Btn_Minisize.Size = new System.Drawing.Size(31, 23);
+            this.Btn_Minisize.TabIndex = 5;
+            this.Btn_Minisize.Text = "_";
+            this.Btn_Minisize.UseVisualStyleBackColor = true;
             this.Btn_Minisize.Click += new System.EventHandler(this.Btn_Minisize_Click);
             // 
             // Btn_Close
             // 
-            this.Btn_Close.Image = global::IPScanner.Properties.Resources.Btn_Close;
-            this.Btn_Close.Location = new System.Drawing.Point(728, 6);
+            this.Btn_Close.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.Btn_Close.FlatAppearance.BorderSize = 0;
+            this.Btn_Close.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.Btn_Close.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.Btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Close.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Btn_Close.ForeColor = System.Drawing.Color.White;
+            this.Btn_Close.Location = new System.Drawing.Point(723, 6);
             this.Btn_Close.Name = "Btn_Close";
-            this.Btn_Close.Size = new System.Drawing.Size(25, 23);
-            this.Btn_Close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.Btn_Close.TabIndex = 3;
-            this.Btn_Close.TabStop = false;
+            this.Btn_Close.Size = new System.Drawing.Size(31, 23);
+            this.Btn_Close.TabIndex = 5;
+            this.Btn_Close.Text = "x";
+            this.Btn_Close.UseVisualStyleBackColor = true;
             this.Btn_Close.Click += new System.EventHandler(this.Btn_Close_Click);
             // 
             // Lbl_Title
@@ -297,6 +306,49 @@
             this.columnHeader6.Text = "备注";
             this.columnHeader6.Width = 116;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItem_Filter});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
+            // 
+            // MenuItem_Filter
+            // 
+            this.MenuItem_Filter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItem_OnlineHost,
+            this.MenuItem_Mac,
+            this.MenuItem_HostName,
+            this.MenuItem_All});
+            this.MenuItem_Filter.Name = "MenuItem_Filter";
+            this.MenuItem_Filter.Size = new System.Drawing.Size(100, 22);
+            this.MenuItem_Filter.Text = "筛选";
+            // 
+            // MenuItem_OnlineHost
+            // 
+            this.MenuItem_OnlineHost.Name = "MenuItem_OnlineHost";
+            this.MenuItem_OnlineHost.Size = new System.Drawing.Size(128, 22);
+            this.MenuItem_OnlineHost.Text = "在线主机";
+            this.MenuItem_OnlineHost.Click += new System.EventHandler(this.MenuItem_OnlineHost_Click);
+            // 
+            // MenuItem_Mac
+            // 
+            this.MenuItem_Mac.Name = "MenuItem_Mac";
+            this.MenuItem_Mac.Size = new System.Drawing.Size(128, 22);
+            this.MenuItem_Mac.Text = "MAC地址";
+            // 
+            // MenuItem_HostName
+            // 
+            this.MenuItem_HostName.Name = "MenuItem_HostName";
+            this.MenuItem_HostName.Size = new System.Drawing.Size(128, 22);
+            this.MenuItem_HostName.Text = "主机名";
+            // 
+            // MenuItem_All
+            // 
+            this.MenuItem_All.Name = "MenuItem_All";
+            this.MenuItem_All.Size = new System.Drawing.Size(128, 22);
+            this.MenuItem_All.Text = "所有地址";
+            // 
             // Lbl_Status
             // 
             this.Lbl_Status.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
@@ -331,49 +383,6 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItem_Filter});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
-            // 
-            // MenuItem_Filter
-            // 
-            this.MenuItem_Filter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItem_OnlineHost,
-            this.MenuItem_Mac,
-            this.MenuItem_HostName,
-            this.MenuItem_All});
-            this.MenuItem_Filter.Name = "MenuItem_Filter";
-            this.MenuItem_Filter.Size = new System.Drawing.Size(152, 22);
-            this.MenuItem_Filter.Text = "筛选";
-            // 
-            // MenuItem_OnlineHost
-            // 
-            this.MenuItem_OnlineHost.Name = "MenuItem_OnlineHost";
-            this.MenuItem_OnlineHost.Size = new System.Drawing.Size(152, 22);
-            this.MenuItem_OnlineHost.Text = "在线主机";
-            this.MenuItem_OnlineHost.Click += new System.EventHandler(this.MenuItem_OnlineHost_Click);
-            // 
-            // MenuItem_Mac
-            // 
-            this.MenuItem_Mac.Name = "MenuItem_Mac";
-            this.MenuItem_Mac.Size = new System.Drawing.Size(152, 22);
-            this.MenuItem_Mac.Text = "MAC地址";
-            // 
-            // MenuItem_HostName
-            // 
-            this.MenuItem_HostName.Name = "MenuItem_HostName";
-            this.MenuItem_HostName.Size = new System.Drawing.Size(152, 22);
-            this.MenuItem_HostName.Text = "主机名";
-            // 
-            // MenuItem_All
-            // 
-            this.MenuItem_All.Name = "MenuItem_All";
-            this.MenuItem_All.Size = new System.Drawing.Size(152, 22);
-            this.MenuItem_All.Text = "所有地址";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -388,8 +397,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Panel_Title.ResumeLayout(false);
             this.Panel_Title.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Btn_Minisize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Btn_Close)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -408,8 +415,6 @@
         private IPAddressControlLib.IPAddressControl IPBox_EndAddress;
         private System.Windows.Forms.Button Btn_Scan;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.PictureBox Btn_Close;
-        private System.Windows.Forms.PictureBox Btn_Minisize;
         private System.Windows.Forms.TextBox TextBox_ThreadCount;
         private System.Windows.Forms.Label Lbl_ThreadCount;
         private System.Windows.Forms.Label label2;
@@ -430,6 +435,8 @@
         private System.Windows.Forms.ToolStripMenuItem MenuItem_Mac;
         private System.Windows.Forms.ToolStripMenuItem MenuItem_HostName;
         private System.Windows.Forms.ToolStripMenuItem MenuItem_All;
+        private System.Windows.Forms.Button Btn_Minisize;
+        private System.Windows.Forms.Button Btn_Close;
     }
 }
 
