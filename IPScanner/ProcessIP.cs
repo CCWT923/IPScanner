@@ -153,6 +153,7 @@ namespace IPScanner
                     {
                         tmpIp = _AddressList[0];
                         _AddressList.RemoveAt(0);
+                        _ProcessedCount++;
                     }
                     else
                     {
@@ -191,7 +192,7 @@ namespace IPScanner
                 }
 
                 _addressInfoList.Add(info);
-                _ProcessedCount++;
+                
                 Debug.WriteLine(Thread.CurrentThread.Name + " " + Thread.CurrentThread.ThreadState.ToString() + "。已处理："  + _ProcessedCount + " 个，合计：" + _AddressCount);
             }
         }

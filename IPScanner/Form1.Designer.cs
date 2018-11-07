@@ -85,12 +85,13 @@
             this.Btn_Minisize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
             this.Btn_Minisize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSkyBlue;
             this.Btn_Minisize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Minisize.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Btn_Minisize.ForeColor = System.Drawing.Color.White;
-            this.Btn_Minisize.Location = new System.Drawing.Point(684, 6);
+            this.Btn_Minisize.Location = new System.Drawing.Point(696, 4);
             this.Btn_Minisize.Name = "Btn_Minisize";
-            this.Btn_Minisize.Size = new System.Drawing.Size(31, 23);
+            this.Btn_Minisize.Size = new System.Drawing.Size(31, 26);
             this.Btn_Minisize.TabIndex = 5;
-            this.Btn_Minisize.Text = "_";
+            this.Btn_Minisize.Text = "-";
             this.Btn_Minisize.UseVisualStyleBackColor = true;
             this.Btn_Minisize.Click += new System.EventHandler(this.Btn_Minisize_Click);
             // 
@@ -101,13 +102,13 @@
             this.Btn_Close.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
             this.Btn_Close.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.Btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_Close.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Btn_Close.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Close.ForeColor = System.Drawing.Color.White;
-            this.Btn_Close.Location = new System.Drawing.Point(723, 6);
+            this.Btn_Close.Location = new System.Drawing.Point(731, 4);
             this.Btn_Close.Name = "Btn_Close";
-            this.Btn_Close.Size = new System.Drawing.Size(31, 23);
+            this.Btn_Close.Size = new System.Drawing.Size(31, 29);
             this.Btn_Close.TabIndex = 5;
-            this.Btn_Close.Text = "x";
+            this.Btn_Close.Text = "×";
             this.Btn_Close.UseVisualStyleBackColor = true;
             this.Btn_Close.Click += new System.EventHandler(this.Btn_Close_Click);
             // 

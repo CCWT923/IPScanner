@@ -219,6 +219,18 @@ namespace IPScanner
                 SetInfo("扫描完成，在线 " + ipProcessor.OnlineCount + " 个" + "；离线 " + ipProcessor.OfflineCount + " 个。");
             }
         }
+
+
+        private void Btn_Minisize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void Btn_Close_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         #region 菜单功能
         private void MenuItem_OnlineHost_Click(object sender, EventArgs e)
         {
@@ -232,18 +244,13 @@ namespace IPScanner
                         l.Remove();
                     }
                 }
+                MenuItem_OnlineHost.Checked = true;
+                MenuItem_All.Checked = false;
+                MenuItem_HostName.Checked = false;
+                MenuItem_Mac.Checked = false;
             }
+
         }
         #endregion
-
-        private void Btn_Minisize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-        private void Btn_Close_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
     }
 }
